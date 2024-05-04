@@ -207,4 +207,4 @@ import "./styles.scss";
 ```
 4. execute `npm run build` to build the frontend again
 5. navigate to http://localhost:8000 in your web browser and you should notice that the font and margins have changed slightly:
-
+![phase3](https://github.com/DylanCheetah/reactive-calculator/blob/e1538a482d63022187a624ee08917b9c04d554a6/screenshots/phase3.png)
