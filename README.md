@@ -183,5 +183,5 @@ export default App;
 }
 ```
 11. execute `npm run build` to do an initial build of the frontend
-12. navigate to http://localhost in your web browser and you should see this:
+12. navigate to http://localhost:8000 in your web browser and you should see this:
 
