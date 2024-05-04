@@ -185,3 +185,26 @@ export default App;
 11. execute `npm run build` to do an initial build of the frontend
 12. navigate to http://localhost:8000 in your web browser and you should see this:
 ![phase2](https://github.com/DylanCheetah/reactive-calculator/blob/e0424c01a428a99339c125d4befcca0977639866/screenshots/phase2.png)
+
+
+## Phase 3: Setup Bootstrap
+To help us create a good layout and theme for our calculator, we will next setup Bootstrap. Bootstrap provides many layout and theme utilities that will be very helpful to us.
+
+1. execute `npm install --save bootstrap`
+2. open `src/index.js` and add an additional import like this:
+```js
+...
+import React from "react";
+import {createRoot} from "react-dom";
+
+import App from "./App";
+import "./styles.scss";
+...
+```
+3. create `src/styles.scss` with the following content:
+```scss
+@import "bootstrap/dist/css/bootstrap.min"
+```
+4. execute `npm run build` to build the frontend again
+5. navigate to http://localhost:8000 in your web browser and you should notice that the font and margins have changed slightly:
+
