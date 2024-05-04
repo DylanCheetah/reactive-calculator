@@ -184,4 +184,4 @@ export default App;
 ```
 11. execute `npm run build` to do an initial build of the frontend
 12. navigate to http://localhost:8000 in your web browser and you should see this:
-
+![phase2](https://github.com/DylanCheetah/reactive-calculator/blob/e0424c01a428a99339c125d4befcca0977639866/screenshots/phase2.png)
