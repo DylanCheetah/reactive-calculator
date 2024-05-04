@@ -56,3 +56,4 @@ app.listen(PORT, HOST, () => {
 ```
 11. execute `npm run debug` to start the backend
 12. navigate to http://localhost:8000/ in your web browser and you should see this:
+![phase1](https://github.com/DylanCheetah/reactive-calculator/blob/62210358123894eb2d6b1f0e3d9e02509b9c9016/screenshots/phase1.png)
