@@ -141,7 +141,7 @@ module.exports = {
  */
 
 import React from "react";
-import {createRoot} from "react-dom";
+import {createRoot} from "react-dom/client";
 
 import App from "./App";
 
@@ -195,7 +195,7 @@ To help us create a good layout and theme for our calculator, we will next setup
 ```js
 ...
 import React from "react";
-import {createRoot} from "react-dom";
+import {createRoot} from "react-dom/client";
 
 import App from "./App";
 import "./styles.scss";
