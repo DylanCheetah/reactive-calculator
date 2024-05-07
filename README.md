@@ -349,3 +349,4 @@ function App() {
 ```
 6. now build the frontend again
 7. navigate to http://localhost:8000 in your web browser and you should see the following:
+![phase4](https://github.com/DylanCheetah/reactive-calculator/blob/d70a750d18ba91b1ae86f768bddc2f41d02e4f06/screenshots/phase4.png)
