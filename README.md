@@ -825,3 +825,6 @@ As it is right now, our calculator will not display the result of the last opera
 3. build the frontend again
 4. navigate to http://localhost:8000 in your web browser and you should see the finished calculator:
 
+
+## Phase 7: Add App Icon
+For the last phase of this tutorial, we will add an application icon. The application icon will be displayed on the browser tab and in the favorites list for our web app. To add an application icon to a web app, simply draw an icon with software such as GIMP and save it as `public/favicon.ico` within the project folder. Our calculator app is now complete.
