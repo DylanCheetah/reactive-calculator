@@ -808,3 +808,20 @@ export default OperatorButton;
 12. now build the frontend again
 13. navigate to http://localhost:8000 in your web browser and you should be able to use the calculator and get output like this:
 ![phase5](https://github.com/DylanCheetah/reactive-calculator/blob/8beacb1ed43890304798404fc3e3b111e3831332/screenshots/phase5.png)
+
+
+## Phase 6: Improve UX
+As it is right now, our calculator will not display the result of the last operation when we chain operations like `8 * 2 + 5`. We have to press the equal key before the result will be available. However, we can improve our display component so it shows the result of the last portion of the current equation as well as the current math operation. This will enhance the user experience (UX).
+
+1. open `src/components/Display.js`
+2. change the input element in your display component like this:
+```js
+...
+<div className="col m-1">
+    <input className="form-control text-end" value={`${state.operand1} ${state.operation} ${state.input}`} readOnly={true}/>
+</div>
+...
+```
+3. build the frontend again
+4. navigate to http://localhost:8000 in your web browser and you should see the finished calculator:
+

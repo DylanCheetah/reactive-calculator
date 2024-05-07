@@ -16,7 +16,7 @@ function Display() {
 
     return (
         <div className="col m-1">
-            <input className="form-control text-end" value={state.input} readOnly={true}/>
+            <input className="form-control text-end" value={`${state.operand1} ${state.operation} ${state.input}`} readOnly={true}/>
         </div>
     );
 }
