@@ -4,14 +4,19 @@
  * This component displays the current output of the calculator.
  */
 
-import React from "react";
+import React, {useContext} from "react";
+
+import {CalculatorStateCtx} from "../Contexts";
 
 
 // Define display component
-function Display({value}) {
+function Display() {
+    // Initialize state context
+    const state = useContext(CalculatorStateCtx);
+
     return (
         <div className="col m-1">
-            <input className="form-control text-end" value={value}/>
+            <input className="form-control text-end" value={state.input} readOnly={true}/>
         </div>
     );
 }
