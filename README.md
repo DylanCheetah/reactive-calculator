@@ -807,3 +807,4 @@ export default OperatorButton;
 ```
 12. now build the frontend again
 13. navigate to http://localhost:8000 in your web browser and you should be able to use the calculator and get output like this:
+![phase5](https://github.com/DylanCheetah/reactive-calculator/blob/8beacb1ed43890304798404fc3e3b111e3831332/screenshots/phase5.png)
