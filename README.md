@@ -208,3 +208,144 @@ import "./styles.scss";
 4. execute `npm run build` to build the frontend again
 5. navigate to http://localhost:8000 in your web browser and you should notice that the font and margins have changed slightly:
 ![phase3](https://github.com/DylanCheetah/reactive-calculator/blob/e1538a482d63022187a624ee08917b9c04d554a6/screenshots/phase3.png)
+
+
+## Phase 4: Basic UI Layout
+Now that we have our minimal backend, React, and Bootstrap setup, let's start designing the UI layout for our calculator. Bootstrap has a powerful grid based layout system that helps arrange UI elements. It also provides utilities for creating themes more easily.
+
+1. create a `components` folder inside `src`
+2. create `src/components/Display.js` with the following content:
+```js
+/*
+ * Reactive Calculator - Display Component
+ *
+ * This component displays the current output of the calculator.
+ */
+
+import React from "react";
+
+
+// Define display component
+function Display({value}) {
+    return (
+        <div className="col m-1">
+            <input className="form-control text-end" value={value}/>
+        </div>
+    );
+}
+
+
+export default Display;
+```
+3. create `src/components/NumberButton.js` with the following content:
+```js
+/*
+ * Reactive Calculator - Number Button Component
+ *
+ * This component is used to input a number.
+ */
+
+import React from "react";
+
+
+// Define number button component
+function NumberButton({value}) {
+    // Calculate layout
+    let layout = "col";
+
+    if(["0"].indexOf(value) > -1) {
+        layout = "col-8";
+    }
+
+    return (
+        <button className={layout + " m-1 btn btn-primary"}>{value}</button>
+    );
+}
+
+
+export default NumberButton;
+```
+4. create `src/components/OperatorButton.js` with the following content:
+```js
+/*
+ * Reactive Calculator - Operator Button Component
+ *
+ * This component is used to input a math operation.
+ */
+
+import React from "react";
+
+
+// Define operator button component
+function OperatorButton({op}) {
+    // Calculate layout
+    let layout = "col";
+
+    if(["+", "="].indexOf(op) > -1) {
+        layout = "col-2";
+    }
+
+    return (
+        <button className={layout + " m-1 btn btn-primary"}>{op}</button>
+    );
+}
+
+
+export default OperatorButton;
+```
+5. update the body of the app component in `src/App.js` like this:
+```js
+...
+function App() {
+    return (
+        <div className="container-fluid">
+            <div className="row justify-content-center">
+                <div className="col-lg-3 col-md-4">
+                    <div className="row">
+                        <Display value="Display"/>
+                    </div>
+                    <div className="row">
+                        <OperatorButton op="C"/>
+                        <OperatorButton op="/"/>
+                        <OperatorButton op="*"/>
+                        <OperatorButton op="-"/>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <div className="row">
+                                <NumberButton value="7"/>
+                                <NumberButton value="8"/>
+                                <NumberButton value="9"/>
+                            </div>
+                            <div className="row">
+                                <NumberButton value="4"/>
+                                <NumberButton value="5"/>
+                                <NumberButton value="6"/>
+                            </div>
+                        </div>
+                        <OperatorButton op="+"/>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <div className="row">
+                                <NumberButton value="1"/>
+                                <NumberButton value="2"/>
+                                <NumberButton value="3"/>
+                            </div>
+                            <div className="row">
+                                <NumberButton value="0"/>
+                                <OperatorButton op="."/>
+                                <OperatorButton op="+/-"/>
+                            </div>
+                        </div>
+                        <OperatorButton op="="/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+...
+```
+6. now build the frontend again
+7. navigate to http://localhost:8000 in your web browser and you should see the following:
