@@ -355,4 +355,455 @@ function App() {
 ## Phase 5: Application Logic
 Now that we have created the UI layout for our application, we need to define its logic. In order to create the application logic for our calculator app, we will need to be able to manipulate the state of the application via multiple components. One way we can do this is by using a reducer. A reducer is a function that is used to update the state of an application or single component based on the current state and an action object. The reducer and state will need to be available to multiple components. The best way to do this is to utilize contexts to pass the state and dispatch function to multiple components regardless of their depth in the component tree.
 
-1. 
+01. create `src/Contexts.js` with the following content:
+```js
+/*
+ * Reactive Calculator - Contexts
+ *
+ * This script defines the contexts for application state and dispatch.
+ */
+
+import {createContext} from "react";
+
+
+// Create application state and dispatch contexts
+export const CalculatorStateCtx = createContext(null);
+export const CalculatorDispatchCtx = createContext(null);
+```
+02. open `src/App.js`
+03. edit your imports like this:
+```js
+import React, {useReducer} from "react";
+
+import {CalculatorStateCtx, CalculatorDispatchCtx} from "./Contexts";
+import Display from "./components/Display";
+import NumberButton from "./components/NumberButton";
+import OperatorButton from "./components/OperatorButton";
+```
+04. below your imports, add this code:
+```js
+// Define initial calculator state
+const initialState = {
+    input: "",
+    operand1: "",
+    operation: ""
+};
+```
+05. next add the `solve` function:
+```js
+// Define utility functions
+function solve(state) {
+    // Ignore this action if the input is empty
+    if(state.input == "") {
+        return state;
+    }
+
+    // Parse both operands
+    const a = parseFloat(state.operand1);
+    const b = parseFloat(state.input);
+
+    // Solve the equation
+    let c;
+
+    switch(state.operation) {
+        case "+":
+            c = a + b;
+            break;
+
+        case "-":
+            c = a - b;
+            break;
+
+        case "*":
+            c = a * b;
+            break;
+
+        case "/":
+            c = a / b;
+            break;
+
+        default:
+            return state;
+    }
+
+    return {
+        ...state,
+        input: c.toString(),
+        operand1: "",
+        operation: ""
+    };
+}
+```
+06. then add the `reducer` function:
+```js
+// Define calculator reducer
+function reducer(state, action) {
+    // Handle action
+    switch(action.type) {
+        case "PUSH_INPUT":
+            return {
+                ...state,
+                input: state.input + action.value
+            };
+
+        case "PUSH_DECIMAL":
+            return {
+                ...state,
+                input: state.input.replaceAll(".", "") + "."
+            };
+
+        case "TOGGLE_SIGN":
+            // Ignore this action if the input is empty
+            if(["", "."].indexOf(state.input) > -1) {
+                return state;
+            }
+
+            return {
+                ...state,
+                input: (-parseFloat(state.input)).toString()
+            };
+
+        case "CLEAR":
+            return {
+                ...state,
+                input: "",
+                operand1: "",
+                operation: ""
+            };
+
+        case "ADD":
+            // Ignore this action if the input is empty
+            if(["", "."].indexOf(state.input) > -1) {
+                return state;
+            }
+
+            // Chain operation?
+            if(state.operand1 != "" && state.operation != "") {
+                // Solve the equation and set the operation for the next step in the chain
+                const tmpState = solve(state);
+                return {
+                    ...tmpState,
+                    input: "",
+                    operand1: tmpState.input,
+                    operation: "+"
+                };
+            }
+
+            return {
+                ...state,
+                input: "",
+                operand1: state.input,
+                operation: "+"
+            };
+
+        case "SUBTRACT":
+            // Ignore this action if the input is empty
+            if(["", "."].indexOf(state.input) > -1) {
+                return state;
+            }
+
+            // Chain operation?
+            if(state.operand1 != "" && state.operation != "") {
+                // Solve the equation and set the operation for the next step in the chain
+                const tmpState = solve(state);
+                return {
+                    ...tmpState,
+                    input: "",
+                    operand1: tmpState.input,
+                    operation: "-"
+                };
+            }
+
+            return {
+                ...state,
+                input: "",
+                operand1: state.input,
+                operation: "-"
+            };
+        
+        case "MULTIPLY":
+            // Ignore this action if the input is empty
+            if(["", "."].indexOf(state.input) > -1) {
+                return state;
+            }
+
+            // Chain operation?
+            if(state.operand1 != "" && state.operation != "") {
+                // Solve the equation and set the operation for the next step in the chain
+                const tmpState = solve(state);
+                return {
+                    ...tmpState,
+                    input: "",
+                    operand1: tmpState.input,
+                    operation: "*"
+                };
+            }
+
+            return {
+                ...state,
+                input: "",
+                operand1: state.input,
+                operation: "*"
+            };
+
+        case "DIVIDE":
+            // Ignore this action if the input is empty
+            if(["", "."].indexOf(state.input) > -1) {
+                return state;
+            }
+
+            // Chain operation?
+            if(state.operand1 != "" && state.operation != "") {
+                // Solve the equation and set the operation for the next step in the chain
+                const tmpState = solve(state);
+                return {
+                    ...tmpState,
+                    input: "",
+                    operand1: tmpState.input,
+                    operation: "/"
+                };
+            }
+
+            return {
+                ...state,
+                input: "",
+                operand1: state.input,
+                operation: "/"
+            };
+
+        case "SOLVE":
+            return solve(state);
+
+        default:
+            return state;
+    }
+}
+```
+07. now we need to modify the body of our app component like this:
+```js
+// Define app component
+function App() {
+    // Initialize reducer
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    return (
+        <CalculatorStateCtx.Provider value={state}>
+            <CalculatorDispatchCtx.Provider value={dispatch}>
+                <div className="container-fluid">
+                    <div className="row justify-content-center">
+                        <div className="col-lg-3 col-md-4">
+                            <div className="row">
+                                <Display value="Display"/>
+                            </div>
+                            <div className="row">
+                                <OperatorButton op="C"/>
+                                <OperatorButton op="/"/>
+                                <OperatorButton op="*"/>
+                                <OperatorButton op="-"/>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <div className="row">
+                                        <NumberButton value="7"/>
+                                        <NumberButton value="8"/>
+                                        <NumberButton value="9"/>
+                                    </div>
+                                    <div className="row">
+                                        <NumberButton value="4"/>
+                                        <NumberButton value="5"/>
+                                        <NumberButton value="6"/>
+                                    </div>
+                                </div>
+                                <OperatorButton op="+"/>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <div className="row">
+                                        <NumberButton value="1"/>
+                                        <NumberButton value="2"/>
+                                        <NumberButton value="3"/>
+                                    </div>
+                                    <div className="row">
+                                        <NumberButton value="0"/>
+                                        <OperatorButton op="."/>
+                                        <OperatorButton op="+/-"/>
+                                    </div>
+                                </div>
+                                <OperatorButton op="="/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </CalculatorDispatchCtx.Provider>
+        </CalculatorStateCtx.Provider>
+    );
+}
+```
+08. save your changes and close the file
+09. update `src/components/Display.js` like this:
+```js
+/*
+ * Reactive Calculator - Display Component
+ *
+ * This component displays the current output of the calculator.
+ */
+
+import React, {useContext} from "react";
+
+import {CalculatorStateCtx} from "../Contexts";
+
+
+// Define display component
+function Display() {
+    // Initialize state context
+    const state = useContext(CalculatorStateCtx);
+
+    return (
+        <div className="col m-1">
+            <input className="form-control text-end" value={state.input} readOnly={true}/>
+        </div>
+    );
+}
+
+
+export default Display;
+```
+10. update `src/components/NumberButton.js` like this:
+```js
+/*
+ * Reactive Calculator - Number Button Component
+ *
+ * This component is used to input a number.
+ */
+
+import React, {useContext} from "react";
+
+import {CalculatorDispatchCtx} from "../Contexts";
+
+
+// Define number button component
+function NumberButton({value}) {
+    // Initialize dispatch context
+    const dispatch = useContext(CalculatorDispatchCtx);
+
+    // Calculate layout
+    let layout = "col";
+
+    if(["0"].indexOf(value) > -1) {
+        layout = "col-8";
+    }
+
+    // Define event handlers
+    const handleClick = (event) => {
+        // Dispatch push input action
+        dispatch({
+            type: "PUSH_INPUT",
+            value: value
+        });
+    };
+
+    return (
+        <button className={layout + " m-1 btn btn-primary"} onClick={handleClick}>{value}</button>
+    );
+}
+
+
+export default NumberButton;
+```
+11. update `src/components/OperatorButton.js` like this:
+```js
+/*
+ * Reactive Calculator - Operator Button Component
+ *
+ * This component is used to input a math operation.
+ */
+
+import React, {useContext} from "react";
+
+import {CalculatorDispatchCtx} from "../Contexts";
+
+
+// Define operator button component
+function OperatorButton({op}) {
+    // Initialize dispatch context
+    const dispatch = useContext(CalculatorDispatchCtx);
+
+    // Calculate layout
+    let layout = "col";
+
+    if(["+", "="].indexOf(op) > -1) {
+        layout = "col-2";
+    }
+
+    // Define event handlers
+    const handleClick = (event) => {
+        // Choose action based on operation type
+        switch(op) {
+            case "C":
+                // Dispatch clear action
+                dispatch({
+                    type: "CLEAR"
+                });
+                break;
+
+            case ".":
+                // Dispatch push decimal action
+                dispatch({
+                    type: "PUSH_DECIMAL"
+                });
+                break;
+
+            case "+/-":
+                // Dispatch toggle sign action
+                dispatch({
+                    type: "TOGGLE_SIGN"
+                });
+                break;
+
+            case "+":
+                // Dispatch add action
+                dispatch({
+                    type: "ADD"
+                });
+                break;
+
+            case "-":
+                // Dispatch subtract action
+                dispatch({
+                    type: "SUBTRACT"
+                });
+                break;
+            
+            case "*":
+                // Dispatch multiply action
+                dispatch({
+                    type: "MULTIPLY"
+                });
+                break;
+
+            case "/":
+                // Dispatch divide action
+                dispatch({
+                    type: "DIVIDE"
+                });
+                break;
+
+            case "=":
+                // Dispatch solve action
+                dispatch({
+                    type: "SOLVE"
+                });
+                break;
+        }
+    };
+
+    return (
+        <button className={layout + " m-1 btn btn-primary"} onClick={handleClick}>{op}</button>
+    );
+}
+
+
+export default OperatorButton;
+```
+12. now build the frontend again
+13. navigate to http://localhost:8000 in your web browser and you should be able to use the calculator and get output like this:

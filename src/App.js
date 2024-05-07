@@ -82,7 +82,7 @@ function reducer(state, action) {
 
         case "TOGGLE_SIGN":
             // Ignore this action if the input is empty
-            if(state.input == "") {
+            if(["", "."].indexOf(state.input) > -1) {
                 return state;
             }
 
@@ -100,8 +100,13 @@ function reducer(state, action) {
             };
 
         case "ADD":
+            // Ignore this action if the input is empty
+            if(["", "."].indexOf(state.input) > -1) {
+                return state;
+            }
+
             // Chain operation?
-            if(state.operand1 != "" && state.operation != "" && state.input != "") {
+            if(state.operand1 != "" && state.operation != "") {
                 // Solve the equation and set the operation for the next step in the chain
                 const tmpState = solve(state);
                 return {
@@ -120,8 +125,13 @@ function reducer(state, action) {
             };
 
         case "SUBTRACT":
+            // Ignore this action if the input is empty
+            if(["", "."].indexOf(state.input) > -1) {
+                return state;
+            }
+
             // Chain operation?
-            if(state.operand1 != "" && state.operation != "" && state.input != "") {
+            if(state.operand1 != "" && state.operation != "") {
                 // Solve the equation and set the operation for the next step in the chain
                 const tmpState = solve(state);
                 return {
@@ -140,8 +150,13 @@ function reducer(state, action) {
             };
         
         case "MULTIPLY":
+            // Ignore this action if the input is empty
+            if(["", "."].indexOf(state.input) > -1) {
+                return state;
+            }
+
             // Chain operation?
-            if(state.operand1 != "" && state.operation != "" && state.input != "") {
+            if(state.operand1 != "" && state.operation != "") {
                 // Solve the equation and set the operation for the next step in the chain
                 const tmpState = solve(state);
                 return {
@@ -160,8 +175,13 @@ function reducer(state, action) {
             };
 
         case "DIVIDE":
+            // Ignore this action if the input is empty
+            if(["", "."].indexOf(state.input) > -1) {
+                return state;
+            }
+
             // Chain operation?
-            if(state.operand1 != "" && state.operation != "" && state.input != "") {
+            if(state.operand1 != "" && state.operation != "") {
                 // Solve the equation and set the operation for the next step in the chain
                 const tmpState = solve(state);
                 return {
