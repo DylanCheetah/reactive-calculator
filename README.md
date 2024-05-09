@@ -1,5 +1,5 @@
 # reactive-calculator
-A simple desktop calculator made with React to demonstrate basic frontend web development concepts.
+A simple desktop calculator made with React to demonstrate basic frontend web development concepts. A full step-by-step tutorial that teaches how to recreate this project from scratch for educational purposes is included.
 
 
 ## Required Software
@@ -8,7 +8,17 @@ A simple desktop calculator made with React to demonstrate basic frontend web de
 * a web browser
 
 
-## Phase 1: Create Minimal Backend
+## Usage
+1. clone this repo
+2. install Node.js
+3. open a terminal to the project folder
+4. execute `npm install --save` to install the required dependencies
+5. execute `npm start` to start the backend
+6. navigate to http://localhost:8000 in your web browser
+
+
+## Tutorial
+### Phase 1: Create Minimal Backend
 Before we can start creating our frontend, we will need a minimal backend that will simply serve our frontend to each client. We will use Express.js to create our backend and we will also use Nodemon to facilitate the development of our backend. Both of these packages will be installed via npm. We will also create a simple webpage that will serve as the basis of our frontend.
 
 01. create a folder named `reactive-calculator`
@@ -71,7 +81,7 @@ app.listen(PORT, HOST, () => {
 ![phase1](https://github.com/DylanCheetah/reactive-calculator/blob/62210358123894eb2d6b1f0e3d9e02509b9c9016/screenshots/phase1.png)
 
 
-## Phase 2: Setup React
+### Phase 2: Setup React
 Before we start writing the code for our frontend, we will need to setup React. This can be done manually or via automated tools such as `create-react-app`. In this tutorial, we will show you how to setup React manually in order to gain an in-depth understanding of how the build system works. We will be using Webpack to handle building and packaging our frontend code, Babel to compile our JSX code to plain JS code, and various Webpack loaders and plugins in order to assist with the automatic packaging process.
 
 01. click Terminal > New Terminal to open another terminal
@@ -187,7 +197,7 @@ export default App;
 ![phase2](https://github.com/DylanCheetah/reactive-calculator/blob/e0424c01a428a99339c125d4befcca0977639866/screenshots/phase2.png)
 
 
-## Phase 3: Setup Bootstrap
+### Phase 3: Setup Bootstrap
 To help us create a good layout and theme for our calculator, we will next setup Bootstrap. Bootstrap provides many layout and theme utilities that will be very helpful to us.
 
 1. execute `npm install --save bootstrap`
@@ -210,7 +220,7 @@ import "./styles.scss";
 ![phase3](https://github.com/DylanCheetah/reactive-calculator/blob/e1538a482d63022187a624ee08917b9c04d554a6/screenshots/phase3.png)
 
 
-## Phase 4: Basic UI Layout
+### Phase 4: Basic UI Layout
 Now that we have our minimal backend, React, and Bootstrap setup, let's start designing the UI layout for our calculator. Bootstrap has a powerful grid based layout system that helps arrange UI elements. It also provides utilities for creating themes more easily.
 
 1. create a `components` folder inside `src`
@@ -352,7 +362,7 @@ function App() {
 ![phase4](https://github.com/DylanCheetah/reactive-calculator/blob/d70a750d18ba91b1ae86f768bddc2f41d02e4f06/screenshots/phase4.png)
 
 
-## Phase 5: Application Logic
+### Phase 5: Application Logic
 Now that we have created the UI layout for our application, we need to define its logic. In order to create the application logic for our calculator app, we will need to be able to manipulate the state of the application via multiple components. One way we can do this is by using a reducer. A reducer is a function that is used to update the state of an application or single component based on the current state and an action object. The reducer and state will need to be available to multiple components. The best way to do this is to utilize contexts to pass the state and dispatch function to multiple components regardless of their depth in the component tree.
 
 01. create `src/Contexts.js` with the following content:
@@ -810,7 +820,7 @@ export default OperatorButton;
 ![phase5](https://github.com/DylanCheetah/reactive-calculator/blob/8beacb1ed43890304798404fc3e3b111e3831332/screenshots/phase5.png)
 
 
-## Phase 6: Improve UX
+### Phase 6: Improve UX
 As it is right now, our calculator will not display the result of the last operation when we chain operations like `8 * 2 + 5`. We have to press the equal key before the result will be available. However, we can improve our display component so it shows the result of the last portion of the current equation as well as the current math operation. This will enhance the user experience (UX).
 
 1. open `src/components/Display.js`
@@ -826,5 +836,5 @@ As it is right now, our calculator will not display the result of the last opera
 4. navigate to http://localhost:8000 in your web browser and you should see the finished calculator:
 
 
-## Phase 7: Add App Icon
+### Phase 7: Add App Icon
 For the last phase of this tutorial, we will add an application icon. The application icon will be displayed on the browser tab and in the favorites list for our web app. To add an application icon to a web app, simply draw an icon with software such as GIMP and save it as `public/favicon.ico` within the project folder. Our calculator app is now complete.
