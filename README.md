@@ -365,7 +365,7 @@ function App() {
 ### Phase 5: Application Logic
 Now that we have created the UI layout for our application, we need to define its logic. In order to create the application logic for our calculator app, we will need to be able to manipulate the state of the application via multiple components. One way we can do this is by using a reducer. A reducer is a function that is used to update the state of an application or single component based on the current state and an action object. The reducer and state will need to be available to multiple components. The best way to do this is to utilize contexts to pass the state and dispatch function to multiple components regardless of their depth in the component tree.
 
-01. create `src/Contexts.js` with the following content:
+01. create `src/context.js` with the following content:
 ```js
 /*
  * Reactive Calculator - Contexts

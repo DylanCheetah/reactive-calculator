@@ -6,7 +6,7 @@
 
 import React, {useContext} from "react";
 
-import {CalculatorDispatchCtx} from "../Contexts";
+import {CalculatorDispatchCtx} from "../context";
 
 
 // Define number button component

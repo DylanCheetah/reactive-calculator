@@ -6,7 +6,7 @@
 
 import React, {useReducer} from "react";
 
-import {CalculatorStateCtx, CalculatorDispatchCtx} from "./Contexts";
+import {CalculatorStateCtx, CalculatorDispatchCtx} from "./context";
 import Display from "./components/Display";
 import NumberButton from "./components/NumberButton";
 import OperatorButton from "./components/OperatorButton";

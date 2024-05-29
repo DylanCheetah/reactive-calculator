@@ -6,7 +6,7 @@
 
 import React, {useContext} from "react";
 
-import {CalculatorStateCtx} from "../Contexts";
+import {CalculatorStateCtx} from "../context";
 
 
 // Define display component
