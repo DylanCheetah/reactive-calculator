@@ -15,9 +15,7 @@ function Display() {
     const state = useContext(CalculatorStateCtx);
 
     return (
-        <div className="col m-1">
-            <input className="form-control text-end" value={`${state.operand1} ${state.operation} ${state.input}`} readOnly={true}/>
-        </div>
+        <input className="col m-1 form-control text-end" value={`${state.operand1} ${state.operation} ${state.input}`} readOnly={true}/>
     );
 }
 
