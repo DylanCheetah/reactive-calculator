@@ -85,9 +85,8 @@ app.listen(PORT, HOST, () => {
 Before we start writing the code for our frontend, we will need to setup React. This can be done manually or via automated tools such as `create-react-app`. In this tutorial, we will show you how to setup React manually in order to gain an in-depth understanding of how the build system works. We will be using Webpack to handle building and packaging our frontend code, Babel to compile our JSX code to plain JS code, and various Webpack loaders and plugins in order to assist with the automatic packaging process.
 
 01. click Terminal > New Terminal to open another terminal
-02. execute `npm install --save-dev webpack webpack-cli babel-loader css-loader file-loader html-loader sass-loader style-loader @babel/core @babel/preset-env @babel/preset-react sass html-webpack-plugin`
-03. execute `npm install --save react react-dom`
-04. create `.babelrc` with the following content:
+02. execute `npm install --save-dev webpack webpack-cli babel-loader css-loader file-loader html-loader sass-loader style-loader @babel/core @babel/preset-env @babel/preset-react sass html-webpack-plugin react react-dom`
+03. create `.babelrc` with the following content:
 ```json
 {
     "presets": [
@@ -102,13 +101,13 @@ Before we start writing the code for our frontend, we will need to setup React. 
     ]
 }
 ```
-05. create `.browserslistrc` with the following content:
+04. create `.browserslistrc` with the following content:
 ```rc
 > 0.25%
 firefox >= 52.3.0
 not dead
 ```
-06. create `webpack.config.js` with the following content:
+05. create `webpack.config.js` with the following content:
 ```js
 const path = require("path");
 const webpack = require("webpack");
@@ -153,9 +152,9 @@ module.exports = {
     ]
 };
 ```
-07. create a `src` folder inside your project folder
-08. move `public/index.html` to `src`
-09. create `src/index.js` with the following content:
+06. create a `src` folder inside your project folder
+07. move `public/index.html` to `src`
+08. create `src/index.js` with the following content:
 ```js
 /*
  * Reactive Calculator - Frontend Entrypoint
@@ -173,7 +172,7 @@ import App from "./App";
 const root = createRoot(document.querySelector("#root"));
 root.render(<App/>);
 ```
-10. create `src/App.js` with the following content:
+09. create `src/App.js` with the following content:
 ```js
 /*
  * Reactive Calculator - App Component
@@ -194,7 +193,7 @@ function App() {
 
 export default App;
 ```
-11. open `package.json` and add a build script like this:
+10. open `package.json` and add a build script like this:
 ```json
 {
   ...
@@ -205,15 +204,15 @@ export default App;
   ...
 }
 ```
-12. execute `npm run build` to do an initial build of the frontend
-13. navigate to http://localhost:8000 in your web browser and you should see this:
+11. execute `npm run build` to do an initial build of the frontend
+12. navigate to http://localhost:8000 in your web browser and you should see this:
 ![phase2](https://github.com/DylanCheetah/reactive-calculator/blob/e0424c01a428a99339c125d4befcca0977639866/screenshots/phase2.png)
 
 
 ### Phase 3: Setup Bootstrap
 To help us create a good layout and theme for our calculator, we will next setup Bootstrap. Bootstrap provides many layout and theme utilities that will be very helpful to us.
 
-1. execute `npm install --save bootstrap`
+1. execute `npm install --save-dev bootstrap`
 2. open `src/index.js` and add an additional import like this:
 ```js
 ...
